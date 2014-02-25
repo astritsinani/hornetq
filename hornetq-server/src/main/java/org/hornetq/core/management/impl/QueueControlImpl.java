@@ -205,7 +205,7 @@ public class QueueControlImpl extends AbstractControl implements QueueControl
       clearIO();
       try
       {
-         return queue.getMessageCount();
+         return queue.getInstantMessageCount();
       }
       finally
       {
