@@ -4,7 +4,7 @@
    <groupId>org.hornetq</groupId>
    <artifactId>hornetq-pom</artifactId>
    <packaging>pom</packaging>
-   <version>2.4.0.Final</version>
+   <version>2.4.0-Final-ts1</version>
     <modules>
         <module>hornetq-protocols</module>
     </modules>
@@ -69,11 +69,12 @@
    </scm>
 
    <distributionManagement>
-      <repository>
-         <id>jboss-releases-repository</id>
-         <name>JBoss Releases Repository</name>
-         <url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</url>
-      </repository>
+	<repository>
+	    <id>releases</id>
+	    <name>OpenPorta Internal Releases</name>
+	    <url>http://nexus.tradeshift.com:9999/nexus/content/repositories/releases</url>
+	</repository>
+
       <snapshotRepository>
          <id>jboss-snapshots-repository</id>
          <name>JBoss Snapshots Repository</name>
