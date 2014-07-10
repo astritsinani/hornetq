@@ -675,7 +675,10 @@ public class ServerConsumerImpl implements ServerConsumer, ReadyListener
       else if (credits == 0)
       {
          // reset, used on slow consumers
-         HornetQServerLogger.LOGGER.debug(this + ":: FlowControl::Received reset flow control message");
+         if (HornetQServerLogger.LOGGER.isDebugEnabled())
+         {
+            HornetQServerLogger.LOGGER.debug(this + ":: FlowControl::Received reset flow control message");
+         }
          availableCredits.set(0);
       }
       else
