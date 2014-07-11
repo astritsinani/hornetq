@@ -45,6 +45,9 @@ import org.hornetq.utils.json.JSONArray;
 import org.hornetq.utils.json.JSONException;
 import org.hornetq.utils.json.JSONObject;
 
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
+
 /**
  * @author <a href="mailto:jmesnil@redhat.com">Jeff Mesnil</a>
  *
@@ -967,10 +970,17 @@ public class QueueControlImpl extends AbstractControl implements QueueControl
       }
    }
 
+   private Supplier<MBeanOperationInfo[]> infoSupplier = Suppliers.memoize(new Supplier<MBeanOperationInfo[]>() {
+      @Override
+      public MBeanOperationInfo[] get() {
+         return MBeanInfoHelper.getMBeanOperationsInfo(QueueControl.class);
+      }
+   });
+   
    @Override
    protected MBeanOperationInfo[] fillMBeanOperationInfo()
    {
-      return MBeanInfoHelper.getMBeanOperationsInfo(QueueControl.class);
+      return infoSupplier.get();
    }
    
    public void resetMessagesAdded() throws Exception
