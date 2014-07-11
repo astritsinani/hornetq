@@ -428,6 +428,14 @@
            <unpack>false</unpack>
            <outputFileNameMapping>proton-j-impl.jar</outputFileNameMapping>
        </dependencySet>
+       <dependencySet>
+           <includes>
+               <include>com.google.guava:guava</include>
+           </includes>
+           <outputDirectory>lib</outputDirectory>
+           <unpack>false</unpack>
+           <outputFileNameMapping>guava.jar</outputFileNameMapping>
+       </dependencySet>
    </dependencySets>
   <fileSets>
     <fileSet>

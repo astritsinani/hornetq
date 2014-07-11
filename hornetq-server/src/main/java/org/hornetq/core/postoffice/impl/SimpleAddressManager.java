@@ -28,6 +28,10 @@ import org.hornetq.utils.ConcurrentHashSet;
 import org.hornetq.core.server.HornetQServerLogger;
 import org.hornetq.core.server.HornetQMessageBundle;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+
 /**
  * A simple address manager that maintains the addresses and bindings.
  *
@@ -121,16 +125,22 @@ public class SimpleAddressManager implements AddressManager
    {
       return nameMap;
    }
+   
+   private LoadingCache<SimpleString, Address> addressCache = CacheBuilder.newBuilder().maximumSize(10000).build(new CacheLoader<SimpleString, Address>() {
+      @Override
+      public Address load(SimpleString string) throws Exception {
+         return new AddressImpl(string);
+    }});
 
    public Bindings getMatchingBindings(final SimpleString address) throws Exception
    {
-      Address add = new AddressImpl(address);
+      Address add = addressCache.getUnchecked(address);
 
       Bindings bindings = bindingsFactory.createBindings(address);
 
       for (Binding binding : nameMap.values())
       {
-         Address addCheck = new AddressImpl(binding.getAddress());
+         Address addCheck = addressCache.getUnchecked(binding.getAddress());
 
          if (addCheck.matches(add))
          {
