@@ -2062,7 +2062,7 @@ public class QueueImpl implements Queue
           }
       }
 
-      if (pageIterator != null && messageReferences.size() == 0 && pageSubscription.isPaging() && pageIterator.hasNext() && !depagePending)
+      if (pageIterator != null && !depagePending && messageReferences.size() == 0 && pageSubscription.isPaging() && pageIterator.hasNext())
       {
          scheduleDepage(false);
       }
