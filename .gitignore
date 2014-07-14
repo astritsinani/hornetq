@@ -747,3 +747,6 @@ hornetq.log
 */hornetq.log
 */*/hornetq.log
 */*/*/hornetq.log
+
+*.versionsBackup
+
